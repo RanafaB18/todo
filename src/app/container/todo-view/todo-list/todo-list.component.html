@@ -1,0 +1,10 @@
+<section class="p-3">
+    <ng-container *ngIf="todoItems.length > 0; else elseBlock">
+        <div *ngFor="let todo of todoItems; trackBy: trackByFn" class="flex-1 rounded-b-3xl px-3">
+            <app-todo-item [todo]="todo" (todosChange)="refreshData($event)"></app-todo-item>
+        </div>
+    </ng-container>
+    <ng-template #elseBlock>
+        <p class="">Nothing planned for today</p>
+    </ng-template>
+</section>

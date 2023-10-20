@@ -1,0 +1,22 @@
+<section class="flex flex-col p-3 mt-6">
+    <form (ngSubmit)="createTodo()" #myForm="ngForm" class="flex flex-col gap-2">
+        <div class="my-2">
+            <label for="todo">What are you doing today ?</label>
+            <input required id="todo" name="todo" [ngClass]="todoVar.invalid && myForm.submitted ? 'outline-none outline-red-600': '' " [value]="todo.whatToDo" class="p-3 w-full my-2" [(ngModel)]="todo.whatToDo" #todoVar="ngModel" />
+            <div *ngIf="todoVar.invalid && myForm.submitted">
+                <small class="text-red-600">
+                    To-do is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="flex justify-between">
+            <button class="bg-[#0b86d9] py-1 px-2 text-white rounded-lg" type="submit">
+                {{todo.id === 0 ? "Create Todo" : "Edit Todo"}}
+            </button>
+            <button class=" py-1 px-2 text-white rounded-lg bg-red-600" routerLink="/todo-list" type="button">
+                Cancel
+            </button>
+        </div>
+    </form>
+</section>
