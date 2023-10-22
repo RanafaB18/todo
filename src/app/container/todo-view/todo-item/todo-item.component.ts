@@ -31,10 +31,6 @@ export class TodoItemComponent {
 
   delete(id: number) {
     this._todoService.deleteTodo(id);
-    this.onTodosChange()
-  }
-
-  onTodosChange() {
     this.todosChange.emit(this._todoService.getTodos())
   }
 
