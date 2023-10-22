@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { todo } from 'src/interfaces';
 import { TodoServiceService } from 'src/todo-service.service';
@@ -11,7 +11,9 @@ import { TodoServiceService } from 'src/todo-service.service';
 export class TodoItemComponent {
   @Input() todo !: todo
   @Output() todosChange = new EventEmitter<todo[]>()
+  @ViewChild('todoItem') todoItem!: ElementRef
   isHovered = false
+  isClicked = false
 
   constructor(private _todoService: TodoServiceService, private _router: Router) {}
   @HostListener('mouseenter')
@@ -34,5 +36,14 @@ export class TodoItemComponent {
 
   onTodosChange() {
     this.todosChange.emit(this._todoService.getTodos())
+  }
+
+  onTodoDoneToggle() {
+    if (this.isClicked) {
+      this.todoItem.nativeElement.style.textDecoration = ''
+    } else {
+      this.todoItem.nativeElement.style.textDecoration = 'line-through'
+    }
+    this.isClicked = !this.isClicked
   }
 }
