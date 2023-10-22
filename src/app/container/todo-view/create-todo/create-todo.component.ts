@@ -22,7 +22,7 @@ export class CreateTodoComponent implements OnInit {
     const id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     const todo = this._todoService.getTodoWithId(id);
     if (!todo) {
-      this.todo = { whatToDo: '', id: 0};
+      this.todo = { whatToDo: '', id: 0, completed: false};
     } else {
       this.todo = todo
     }
@@ -33,9 +33,10 @@ export class CreateTodoComponent implements OnInit {
       this._todoService.setTodo({
         whatToDo: this.todo.whatToDo,
         id: this._todoService.getID(),
+        completed: false
       });
     } else {
-      this._todoService.updateTodoWithId(this.todo)
+      this._todoService.updateTodoWithId({...this.todo, completed: false})
     }
     this._router.navigateByUrl('/todo-list');
   }

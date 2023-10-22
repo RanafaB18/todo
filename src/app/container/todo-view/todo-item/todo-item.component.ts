@@ -11,9 +11,7 @@ import { TodoServiceService } from 'src/todo-service.service';
 export class TodoItemComponent {
   @Input() todo !: todo
   @Output() todosChange = new EventEmitter<todo[]>()
-  @ViewChild('todoItem') todoItem!: ElementRef
   isHovered = false
-  isClicked = false
 
   constructor(private _todoService: TodoServiceService, private _router: Router) {}
   @HostListener('mouseenter')
@@ -29,17 +27,16 @@ export class TodoItemComponent {
     this._router.navigateByUrl(`/edit-todo/${id}`)
   }
 
-  delete(id: number) {
+  delete(event: Event, id: number) {
+    event.stopPropagation()
     this._todoService.deleteTodo(id);
     this.todosChange.emit(this._todoService.getTodos())
   }
 
-  onTodoDoneToggle() {
-    if (this.isClicked) {
-      this.todoItem.nativeElement.style.textDecoration = ''
-    } else {
-      this.todoItem.nativeElement.style.textDecoration = 'line-through'
-    }
-    this.isClicked = !this.isClicked
+  onTodoDoneToggle(todoArg: todo) {
+    const newTodo: todo = { ...todoArg, completed: !todoArg.completed }
+    this._todoService.updateTodoWithId(newTodo)
+    this.todosChange.emit(this._todoService.getTodos())
+
   }
 }
