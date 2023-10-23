@@ -5,12 +5,7 @@ import { v4 as uuid } from 'uuid'
   providedIn: 'root',
 })
 export class TodoServiceService {
-  todoItems: todo[] = [
-    { completed: false, whatToDo: 'Pray', id: "one" },
-    { completed: false, whatToDo: 'Learn', id: "two" },
-    { completed: false, whatToDo: 'Eat', id: "three" },
-    { completed: false, whatToDo: 'Run', id: "four" },
-  ];
+  todoItems: todo[] = [];
   flag = false
 
   constructor() {}
