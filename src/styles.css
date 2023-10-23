@@ -5,6 +5,10 @@ body {
     display: none;
 }
 
+.overflow-scroll {
+    scrollbar-width: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
