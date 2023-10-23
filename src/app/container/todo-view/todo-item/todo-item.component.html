@@ -1,6 +1,5 @@
-<article (click)="onTodoDoneToggle(todo)" class="flex items-center cursor-pointer justify-between m-3 py-2 border-b border-black">
+<article (click)="onTodoDoneToggle(todo)" class="flex items-center cursor-pointer justify-between py-2 border-b border-black">
     <div class="flex items-center gap-2 text-lg font-semibold">
-        <p>{{todo.id}}.</p>
         <p #todoItem [ngClass]="todo.completed ? 'line-through' : '' ">{{todo.whatToDo}}</p>
     </div>
 

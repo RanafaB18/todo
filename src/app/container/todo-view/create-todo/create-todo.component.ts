@@ -19,17 +19,17 @@ export class CreateTodoComponent implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    const id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
+    const id = this._activatedRoute.snapshot.paramMap.get('id') || "";
     const todo = this._todoService.getTodoWithId(id);
     if (!todo) {
-      this.todo = { whatToDo: '', id: 0, completed: false};
+      this.todo = { whatToDo: '', id: "", completed: false};
     } else {
       this.todo = todo
     }
   }
   createTodo() {
     if (!this.todo.whatToDo) return;
-    if (this.todo.id === 0) {
+    if (this.todo.id === "") {
       this._todoService.setTodo({
         whatToDo: this.todo.whatToDo,
         id: this._todoService.getID(),

@@ -6,7 +6,7 @@ import { TodoServiceService } from 'src/todo-service.service';
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  styleUrls: ['./todo-item.component.css'],
 })
 export class TodoItemComponent {
   @Input() todo !: todo
@@ -23,11 +23,11 @@ export class TodoItemComponent {
     this.isHovered = false
   }
 
-  edit(id: number) {
+  edit(id: string) {
     this._router.navigateByUrl(`/edit-todo/${id}`)
   }
 
-  delete(event: Event, id: number) {
+  delete(event: Event, id: string) {
     event.stopPropagation()
     this._todoService.deleteTodo(id);
     this.todosChange.emit(this._todoService.getTodos())

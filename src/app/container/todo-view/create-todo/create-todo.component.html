@@ -12,7 +12,7 @@
 
         <div class="flex justify-between">
             <button class="bg-[#0b86d9] py-1 px-2 text-white rounded-lg" type="submit">
-                {{todo.id === 0 ? "Create Todo" : "Edit Todo"}}
+                {{todo.id === "" ? "Create Todo" : "Edit Todo"}}
             </button>
             <button class=" py-1 px-2 text-white rounded-lg bg-red-600" routerLink="/todo-list" type="button">
                 Cancel
